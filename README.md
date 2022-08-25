@@ -17,14 +17,27 @@ import (
 )
 
 func main() {
-	fmt.Printf("°F to °C: %v °C\n", thc.FtoC(100))
-	fmt.Printf("°C to °F: %v °F\n", thc.CtoF(30))
-	fmt.Printf("DewPoint: %v °C\n", thc.DewPoint(35, 85))
-	fmt.Printf("WetBulb: %v(°C)\n", thc.WetBulb(35, 85))
-	fmt.Printf("Absolute Humidity: %v(KG_Water/KG_DryAir)\n", thc.AH(35, 85))
-	fmt.Printf("Enthalpy: %v(kJ/kg):\n", thc.Enth(35, 85))
+	fmt.Printf("°F to °C: %v °C\n", thc.FtoC(100)) 
+	//°F to °C: 37.78 °C
+
+	fmt.Printf("°C to °F: %v °F\n", thc.CtoF(30)) 
+	//°C to °F: 86 °F
+
+	fmt.Printf("DewPoint: %v °C\n", thc.DewPoint(35, 85)) 
+	//DewPoint: 32.1 °C
+
+	fmt.Printf("WetBulb: %v(°C)\n", thc.WetBulb(35, 85)) 
+	//WetBulb: 35.37(°C)
+
+	fmt.Printf("Absolute Humidity: %v(KG_Water/KG_DryAir)\n", thc.AH(35, 85)) 
+	//Absolute Humidity: 30.79(KG_Water/KG_DryAir)
+
+	fmt.Printf("Enthalpy: %v(kJ/kg)\n", thc.Enth(35, 85))
+	//Enthalpy: 397943.85(kJ/kg)
+
 	thi, msg := thc.THI(35, 85)
-	fmt.Printf("THI: %v(%s)", thi, msg)
+	fmt.Printf("THI: %v(%s)", thi, msg) 
+	//THI: 33(Muggy)
 }
 ```
 Hope you like it.
