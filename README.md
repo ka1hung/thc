@@ -29,15 +29,16 @@ func main() {
 	fmt.Printf("WetBulb: %v(°C)\n", thc.WetBulb(35, 85)) 
 	//WetBulb: 35.37(°C)
 
-	fmt.Printf("Absolute Humidity: %v(KG_Water/KG_DryAir)\n", thc.AH(35, 85)) 
-	//Absolute Humidity: 30.79(KG_Water/KG_DryAir)
+	fmt.Printf("Absolute Humidity: %v(g/kg(a))\n", thc.AH(35, 85)) 
+	//Absolute Humidity: 30.79(g/kg(a))
 
 	fmt.Printf("Enthalpy: %v(kJ/kg)\n", thc.Enth(35, 85))
-	//Enthalpy: 397943.85(kJ/kg)
+	//Enthalpy: 114.13(kJ/kg)
 
 	thi, msg := thc.THI(35, 85)
 	fmt.Printf("THI: %v(%s)", thi, msg) 
 	//THI: 33(Muggy)
 }
 ```
+ref: https://www.buildenvi.com/gongju/psychrometrics
 Hope you like it.

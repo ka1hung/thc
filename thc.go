@@ -35,23 +35,23 @@ var pvs []float64 = []float64{
 	84535.8, 87697.2, 90956.1, 94314.9, 97775.9,
 	101341.5}
 
-//CtoF convert °C to °F
+// CtoF convert °C to °F
 func CtoF(t float64) float64 {
 	v := t*9/5 + 32
 	f, _ := decimal.NewFromFloat(v).Round(DecimalPlaces).Float64()
 	return f
 }
 
-//FtoC convert °F to °C
+// FtoC convert °F to °C
 func FtoC(t float64) float64 {
 	v := (t - 32) / 9 * 5
 	f, _ := decimal.NewFromFloat(v).Round(DecimalPlaces).Float64()
 	return f
 }
 
-//Dew Point Temperature calculate
-//in:  t = Temperature(°C); h = Relative Humidity(%);
-//out: DewPoint(°C)
+// Dew Point Temperature calculate
+// in:  t = Temperature(°C); h = Relative Humidity(%);
+// out: DewPoint(°C)
 func DewPoint(t, h float64) float64 {
 	k := (math.Log10(h)-2)/0.4343 + (17.62*t)/(243.12+t)
 	v := 243.12 * k / (17.62 - k)
@@ -59,18 +59,18 @@ func DewPoint(t, h float64) float64 {
 	return f
 }
 
-//Wet Bulb Temperature calculate
-//in: t = Temperature(°C); h = Relative Humidity(%);
-//out: WetBulb(°C)
+// Wet Bulb Temperature calculate
+// in: t = Temperature(°C); h = Relative Humidity(%);
+// out: WetBulb(°C)
 func WetBulb(t, h float64) float64 {
 	wet_bulb := (-5.806 + 0.672*t - 0.006*t*t) + (0.061+0.004*t+0.000099*t*t)*h + (-0.000033-0.000005*t-0.0000001*t*t)*h*h
 	f, _ := decimal.NewFromFloat(wet_bulb).Round(DecimalPlaces).Float64()
 	return f
 }
 
-//Absolute Humidity calculate
-//in: t = Temperature(°C); h = Relative Humidity(%);
-//out: AH (KG_Water/KG_DryAir)
+// Absolute Humidity calculate
+// in: t = Temperature(°C); h = Relative Humidity(%);
+// out: AH (KG_Water/KG_DryAir)
 func AH(t, h float64) float64 {
 	pv := h * pvs[int(t)] / 100
 	w := (0.622 * pv) / (101325 - pv)
@@ -78,25 +78,26 @@ func AH(t, h float64) float64 {
 	return f
 }
 
-//Enthalpy calculate
-//in: t = Temperature(°C); h = Relative Humidity(%);
-//out: Enth(kJ/kg)
+// Enthalpy calculate
+// in: t = Temperature(°C); h = Relative Humidity(%);
+// out: Enth(kJ/kg)
 func Enth(t, h float64) float64 {
-	Enth := (1.005 * t) + (AH(h, t) * (1.805*t + 2501))
+	Enth := (1.005 * t) + ((AH(t, h) * 0.001) * (1.805*t + 2501))
 	f, _ := decimal.NewFromFloat(Enth).Round(DecimalPlaces).Float64()
 	return f
 }
 
-//	Temperature Humidity Index calculate (Comfortable Index)
-//	in: t = Temperature(°C); h = Relative Humidity(%);
-//	out: index, msg
+// Temperature Humidity Index calculate (Comfortable Index)
+// in: t = Temperature(°C); h = Relative Humidity(%);
+// out: index, msg
 //
-//	    THI<=10		-> very cold
-//	11<=THI<=15		-> cold
-//	16<=THI<=19 	-> Slightly cold
-//	20<=THI<=26 	-> comfortable
-//	27<=THI<=30 	-> muggy
-//	31<=THI 		-> danger
+//	THI<=10		-> very cold
+//
+// 11<=THI<=15		-> cold
+// 16<=THI<=19 	-> Slightly cold
+// 20<=THI<=26 	-> comfortable
+// 27<=THI<=30 	-> muggy
+// 31<=THI 		-> danger
 func THI(t, h float64) (int, string) {
 	dp := DewPoint(t, h)
 	thi := t - 0.55*(1-(math.Exp((17.269*dp)/(dp+237.3)))/math.Exp(((17.269*t)/(t+237.3))))*(t-14)
