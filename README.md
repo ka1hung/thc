@@ -40,5 +40,6 @@ func main() {
 	//THI: 33(Muggy)
 }
 ```
-ref: https://www.buildenvi.com/gongju/psychrometrics
 Hope you like it.
+
+ref: https://www.buildenvi.com/gongju/psychrometrics  
