@@ -87,6 +87,16 @@ func Enth(t, h float64) float64 {
 	return f
 }
 
+// Enthalpy calculate in BTU type
+// in: t = Temperature(°C); h = Relative Humidity(%);
+// out: Enth(Btu/lb)
+func EnthBTU(t, h float64) float64 {
+	Enth := (1.005 * t) + ((AH(t, h) * 0.001) * (1.805*t + 2501))
+	btu := (Enth / 23.26) + 7.68
+	f, _ := decimal.NewFromFloat(btu).Round(DecimalPlaces).Float64()
+	return f
+}
+
 // Temperature Humidity Index calculate (Comfortable Index)
 // in: t = Temperature(°C); h = Relative Humidity(%);
 // out: index, msg
