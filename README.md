@@ -32,8 +32,11 @@ func main() {
 	fmt.Printf("Absolute Humidity: %v(g/kg(a))\n", thc.AH(35, 85)) 
 	//Absolute Humidity: 30.79(g/kg(a))
 
-	fmt.Printf("Enthalpy: %v(kJ/kg)\n", thc.Enth(35, 85))
+	fmt.Printf("Enthalpy(kj/kg): %v(kJ/kg)\n", thc.Enth(35, 85))
 	//Enthalpy: 114.13(kJ/kg)
+
+	fmt.Printf("Enthalpy(btu/lb): %v(btu/lb)\n", thc.EnthBTU(35, 85))
+	//Enthalpy: 56.75(btu/lb)
 
 	thi, msg := thc.THI(35, 85)
 	fmt.Printf("THI: %v(%s)", thi, msg) 

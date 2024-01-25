@@ -92,7 +92,7 @@ func Enth(t, h float64) float64 {
 // out: Enth(Btu/lb)
 func EnthBTU(t, h float64) float64 {
 	Enth := (1.005 * t) + ((AH(t, h) * 0.001) * (1.805*t + 2501))
-	btu := (Enth / 23.26) + 7.68
+	btu := (Enth / 2.326) + 7.68
 	f, _ := decimal.NewFromFloat(btu).Round(DecimalPlaces).Float64()
 	return f
 }
@@ -103,7 +103,7 @@ func EnthBTU(t, h float64) float64 {
 //
 //	THI<=10		-> very cold
 //
-// 11<=THI<=15		-> cold
+// 11<=THI<=15	-> cold
 // 16<=THI<=19 	-> Slightly cold
 // 20<=THI<=26 	-> comfortable
 // 27<=THI<=30 	-> muggy
